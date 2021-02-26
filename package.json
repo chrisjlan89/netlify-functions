@@ -1,0 +1,23 @@
+{
+  "name": "netlify-functions",
+  "version": "1.0.0",
+  "description": "## Documentation Coming Soon",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisjlan89/netlify-functions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisjlan89/netlify-functions/issues"
+  },
+  "homepage": "https://github.com/chrisjlan89/netlify-functions#readme"
+}
