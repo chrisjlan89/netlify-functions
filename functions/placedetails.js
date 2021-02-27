@@ -11,7 +11,7 @@ exports.handler = async (event) => {
   const { fields, input, inputType, detailsFields } = JSON.parse(body);
 
   const placesProxyResponse = await axios.post(
-    `api.chrislantier.com/.netlify/functions/placesid`,
+    `http://api.chrislantier.com/.netlify/functions/placesid`,
     {
       input: input,
       inputType: inputType,
