@@ -1,46 +1,50 @@
 const { default: axios } = require("axios");
 
 exports.handler = async (event) => {
-  const { httpMethod, body } = event;
-  if (httpMethod !== "POST") {
-    return {
-      statusCode: 302,
-      body: `Please try a post Request!`,
-    };
-  }
-  const { fields, input, inputType, detailsFields } = JSON.parse(body);
-
-  const placesProxyResponse = await axios.post(
-    `https://api.chrislantier.com/.netlify/functions/placesid`,
-    {
-      input: input,
-      inputType: inputType,
-      fields,
-      detailsFields,
+  try {
+    const { httpMethod, body } = event;
+    if (httpMethod !== "POST") {
+      return {
+        statusCode: 302,
+        body: `Please try a post Request!`,
+      };
     }
-  );
-  const relevant_data = placesProxyResponse.data.candidates[0];
-  const place_id = relevant_data.place_id;
+    const { fields, input, inputType, detailsFields } = JSON.parse(body);
 
-  const getfieldsstr = (fields) => `fields=${fields.join(",")}`;
-  let baseurl = `https://maps.googleapis.com/maps/api/place/details/json?`;
+    const placesProxyResponse = await axios.post(
+      `https://api.chrislantier.com/.netlify/functions/placesid`,
+      {
+        input: input,
+        inputType: inputType,
+        fields,
+        detailsFields,
+      }
+    );
+    const relevant_data = placesProxyResponse.data.candidates[0];
+    const place_id = relevant_data.place_id;
 
-  baseurl += `place_id=${place_id}`;
-  baseurl += `&${getfieldsstr(detailsFields)}`;
-  baseurl += `&key=${process.env.GOOGLE_API_KEY}`;
+    const getfieldsstr = (fields) => `fields=${fields.join(",")}`;
+    let baseurl = `https://maps.googleapis.com/maps/api/place/details/json?`;
 
-  encodeURI(baseurl);
+    baseurl += `place_id=${place_id}`;
+    baseurl += `&${getfieldsstr(detailsFields)}`;
+    baseurl += `&key=${process.env.GOOGLE_API_KEY}`;
 
-  console.log(baseurl);
+    encodeURI(baseurl);
 
-  const { data } = await axios.get(baseurl);
-  c;
-  return {
-    statusCode: 200,
+    console.log(baseurl);
 
-    body: JSON.stringify({
-      ...relevant_data,
-      ...data.result,
-    }),
-  };
+    const { data } = await axios.get(baseurl);
+    c;
+    return {
+      statusCode: 200,
+
+      body: JSON.stringify({
+        ...relevant_data,
+        ...data.result,
+      }),
+    };
+  } catch (e) {
+    console.error();
+  }
 };
