@@ -24,10 +24,9 @@ exports.handler = async (event) => {
 
   const getfieldsstr = (fields) => `fields=${fields.join(",")}`;
   let baseurl = `https://maps.googleapis.com/maps/api/place/details/json?`;
-  console.log(baseurl, "27");
+
   baseurl += `place_id=${place_id}`;
   baseurl += `&${getfieldsstr(detailsFields)}`;
-  console.log(baseurl, "29");
   baseurl += `&key=${process.env.GOOGLE_API_KEY}`;
 
   encodeURI(baseurl);
@@ -35,7 +34,7 @@ exports.handler = async (event) => {
   console.log(baseurl);
 
   const { data } = await axios.get(baseurl);
-  console.log(data);
+  c;
   return {
     statusCode: 200,
 
