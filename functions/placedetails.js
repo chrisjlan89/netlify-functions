@@ -45,6 +45,11 @@ exports.handler = async (event) => {
       }),
     };
   } catch (e) {
-    console.error();
+    console.log(e);
+    return {
+      statusCode: 200,
+
+      body: JSON.stringify(e),
+    };
   }
 };
