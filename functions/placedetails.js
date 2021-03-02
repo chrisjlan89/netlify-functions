@@ -35,7 +35,7 @@ exports.handler = async (event) => {
     console.log(baseurl);
 
     const { data } = await axios.get(baseurl);
-    c;
+
     return {
       statusCode: 200,
 
