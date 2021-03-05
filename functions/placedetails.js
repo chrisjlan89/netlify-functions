@@ -9,7 +9,27 @@ exports.handler = async (event) => {
         body: `Please try a post Request!`,
       };
     }
-    const { fields, input, inputType, detailsFields } = JSON.parse(body);
+
+    const defaultFields = [
+      "place_id",
+      "user_ratings_total",
+      "name",
+      "formatted_address",
+    ];
+    const defaultDetailsFields = [
+      "rating",
+      "price_level",
+      "opening_hours",
+      "photo",
+      "icon",
+      "business_status",
+    ];
+    const {
+      fields = defaultFields,
+      input,
+      inputType,
+      detailsFields = defaultDetailsFields,
+    } = JSON.parse(body);
 
     const placesProxyResponse = await axios.post(
       `https://api.chrislantier.com/.netlify/functions/placesid`,
@@ -17,7 +37,6 @@ exports.handler = async (event) => {
         input: input,
         inputType: inputType,
         fields,
-        detailsFields,
       }
     );
     const relevant_data = placesProxyResponse.data.candidates[0];
@@ -31,8 +50,6 @@ exports.handler = async (event) => {
     baseurl += `&key=${process.env.GOOGLE_API_KEY}`;
 
     encodeURI(baseurl);
-
-    console.log(baseurl);
 
     const { data } = await axios.get(baseurl);
 

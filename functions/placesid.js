@@ -9,7 +9,15 @@ exports.handler = async (event) => {
       body: `Please try a post Request!`,
     };
   }
-  const { fields, input, inputType } = JSON.parse(body);
+
+  const defaultFields = [
+    "place_id",
+    "user_ratings_total",
+    "name",
+    "formatted_address",
+  ];
+  const { fields = defaultFields, input, inputType } = JSON.parse(body);
+
   const inputtype = `inputtype=${inputType}`;
   const getfieldsstr = (fields) => `fields=${fields.join(",")}`;
   let baseurl = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=`;
