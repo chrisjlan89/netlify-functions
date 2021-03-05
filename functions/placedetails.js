@@ -32,7 +32,7 @@ exports.handler = async (event) => {
     } = JSON.parse(body);
 
     const placesProxyResponse = await axios.post(
-      `https://api.chrislantier.com/.netlify/functions/placesid`,
+      process.env.PLACE_ID_ENDPOINT,
       {
         input: input,
         inputType: inputType,

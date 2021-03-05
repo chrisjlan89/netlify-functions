@@ -3,8 +3,8 @@ var cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
   cloud_name: "dkmubywdr",
-  api_key: "936448963673998",
-  api_secret: "Ngwau8V-_4uYQvtruMV1ZOFQovU",
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 exports.handler = async (event) => {
