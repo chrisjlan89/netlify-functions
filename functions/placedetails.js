@@ -1,6 +1,8 @@
 const { default: axios } = require("axios");
+require("dotenv").config();
 
 exports.handler = async (event) => {
+  console.log("???");
   try {
     const { httpMethod, body } = event;
     if (httpMethod !== "POST") {
@@ -41,7 +43,7 @@ exports.handler = async (event) => {
     );
     const relevant_data = placesProxyResponse.data.candidates[0];
     const place_id = relevant_data.place_id;
-
+    console.log("placeid", place_id);
     const getfieldsstr = (fields) => `fields=${fields.join(",")}`;
     let baseurl = `https://maps.googleapis.com/maps/api/place/details/json?`;
 
