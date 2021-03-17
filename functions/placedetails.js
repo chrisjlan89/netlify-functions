@@ -32,7 +32,7 @@ exports.handler = async (event) => {
       inputType,
       detailsFields = defaultDetailsFields,
     } = JSON.parse(body);
-
+    console.log(process.env);
     const placesProxyResponse = await axios.post(
       process.env.PLACE_ID_ENDPOINT,
       {
